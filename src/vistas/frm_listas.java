@@ -29,7 +29,7 @@ public class frm_listas extends javax.swing.JDialog {
     public frm_listas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-       this.cargarListaContactos();
+        this.cargarListaContactos();
     }
 
     /**
@@ -144,9 +144,7 @@ public class frm_listas extends javax.swing.JDialog {
 
     //
     public void cargarListaContactos() {
-
         modelo = new DefaultTableModel(null, getColumnas());
-
         tablaContactos.setModel(modelo);
         int[] anchos = {1, 50, 50, 20};
         for (int i = 0; i < tablaContactos.getColumnCount(); i++) {
@@ -154,8 +152,8 @@ public class frm_listas extends javax.swing.JDialog {
         }
         this.setFilas();
     }
-    //Columnas para Contactos
 
+    //Columnas para Contactos
     private String[] getColumnas() {
         String columna[] = new String[]{"Nombres", "Apellidos", "Correo Electrónico", "Incluir"};
         return columna;
@@ -163,26 +161,17 @@ public class frm_listas extends javax.swing.JDialog {
 
     private void setFilas() {
         Object datos[] = new Object[4];
-
         ArrayList<miembros> miembros_ = dmiembros.ListarMiembros();
         Iterator iterator = miembros_.iterator();
         try {
             while (iterator.hasNext()) {
                 miembros miembro__;
-                //  miembro__ = new miembros();
                 miembro__ = (miembros) iterator.next();
-                // datos[0] = miembro__.getIdmiembro();
                 datos[0] = miembro__.getM_nombres();
                 datos[1] = miembro__.getM_apellidos();
-                //datos[3] = miembro__.getM_telefono();
-                // datos[4] = miembro__.getM_celular();
                 datos[2] = miembro__.getM_mail();
-                //datos[3] = new Boolean(false);
-               // tablaContactos.getColumn("Incluir").setCellEditor(new DefaultCellEditor(checkBox));
-              //  datos[3] = checkBox.setSelected         (false);
                 modelo.addRow(datos);
             }
-
         } catch (Exception e) {
         }
     }
@@ -213,7 +202,6 @@ public class frm_listas extends javax.swing.JDialog {
             java.util.logging.Logger.getLogger(frm_listas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
