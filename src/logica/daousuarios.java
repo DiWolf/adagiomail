@@ -13,8 +13,8 @@ import java.util.ArrayList;
  *
  * @author DiWolf
  */
-public class daousuarios implements interface_usuarios{
-    
+public class daousuarios implements interface_usuarios {
+
     dbusuarios usuarios = new dbusuarios();
 
     @Override
@@ -24,21 +24,21 @@ public class daousuarios implements interface_usuarios{
 
     @Override
     public void EliminarUsuarios(int idUsuario) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       usuarios.EliminarUsuarios(idUsuario);
     }
 
     @Override
     public void ModificarUsuario(int idUsuario, usuarios usuario) {
-       usuarios.ModificarUsuario(idUsuario, usuario);
+        usuarios.ModificarUsuario(idUsuario, usuario);
     }
 
     @Override
     public ArrayList<usuarios> ListarUsuario() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return usuarios.ListarUsuario();
     }
-    
+
     @Override
-    public ArrayList<usuarios> ListarUsuario(int idusuario){
+    public ArrayList<usuarios> ListarUsuario(int idusuario) {
         return usuarios.ListarUsuario(idusuario);
     }
 
@@ -46,5 +46,4 @@ public class daousuarios implements interface_usuarios{
     public boolean Login(String usuaro, String Password) {
         return usuarios.Login(usuaro, Password);
     }
-    
 }
