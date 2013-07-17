@@ -158,12 +158,14 @@ public class frm_login extends javax.swing.JInternalFrame {
     private void btn_ingresarLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresarLoginActionPerformed
         // TODO add your handling code here:
         Conexion.servidor = (txt_servidor.getText());
+        try{
         if (txt_usuarioLogin.getText().isEmpty()) {
             excepciones.CamposVacios(txt_usuarioLogin.getName());
         }
         if (txt_passwordLogin.getText().isEmpty()) {
             excepciones.CamposVacios(txt_passwordLogin.getName());
         } else {
+            if(conectar.getConnection().isClosed()==false){
             boolean x = usuarios_.Login(txt_usuarioLogin.getText(), txt_passwordLogin.getText());
             if (x == true) {
                 excepciones.setPermisos(1);
@@ -171,6 +173,10 @@ public class frm_login extends javax.swing.JInternalFrame {
             } else {
                 excepciones.ErrorValidarUsuario();
             }
+            }
+        }
+        }catch(Exception e){
+            
         }
     }//GEN-LAST:event_btn_ingresarLoginActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -185,4 +191,5 @@ public class frm_login extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txt_servidor;
     private javax.swing.JTextField txt_usuarioLogin;
     // End of variables declaration//GEN-END:variables
+ Conexion conectar = new Conexion();
 }

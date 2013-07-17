@@ -29,7 +29,26 @@ public class dbusuarios implements interface_usuarios {
 
     @Override
     public void AgregarUsuarios(usuarios usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            preparedStatement = cnx.prepareStatement("INSERT INTO cat_usuarios VALUES (default,?,?,?,?,?,?,?,?,?,?,?,?,1)");
+            preparedStatement.setString(1, usuario.getUsr_nombres());
+            preparedStatement.setString(2, usuario.getUsr_apellidos());
+            preparedStatement.setString(3, usuario.getUsr_pop());
+            preparedStatement.setString(4, usuario.getUsr_smtp());
+            preparedStatement.setString(5, usuario.getUsr_popusr());
+            preparedStatement.setString(6, usuario.getUsr_poppass());
+            preparedStatement.setInt(7, usuario.getUsr_admin());
+            preparedStatement.setString(8, usuario.getUsr_correo());
+            preparedStatement.setString(9, usuario.getUsr_telefono());
+            preparedStatement.setString(10, usuario.getUsr_direccion());
+            preparedStatement.setString(11, usuario.getUsuario());
+            preparedStatement.setString(12, usuario.getPassword());
+            // preparedStatement.setInt(13, usuario.get);
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+        }
     }
 
     @Override

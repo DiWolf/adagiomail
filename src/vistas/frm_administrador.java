@@ -50,7 +50,7 @@ public class frm_administrador extends javax.swing.JInternalFrame {
         String columna[] = new String[]{"Clave", "Nombres", "Apellidos", "Telefono"};
         return columna;
     }
-
+    
     private void setFilas() {
         Object datos[] = new Object[4];
         ArrayList<usuarios> usuarios_;
@@ -64,7 +64,7 @@ public class frm_administrador extends javax.swing.JInternalFrame {
                 datos[1] = usuario___.getUsr_nombres();
                 datos[2] = usuario___.getUsr_apellidos();
                 datos[3] = usuario___.getUsr_telefono();
-
+                
                 modelo.addRow(datos);
             }
         } catch (Exception e) {
@@ -76,16 +76,16 @@ public class frm_administrador extends javax.swing.JInternalFrame {
         Object datos[] = new Object[2];
         ArrayList<usuarios> usuario_ = dbusuarios.ListarUsuario(1);
         Iterator iterator = usuario_.iterator();
-
+        
         while (iterator.hasNext()) {
             usuarios usuarios__;
             usuarios__ = (usuarios) iterator.next();
             //Object valor[] = {usuarios__.getUsr_nombres()};
             datos[0] = usuarios__.getUsr_nombres();
             lista.add(datos);
-
+            
         }
-
+        
         Object hierarchy[] = lista.toArray();
         for (int i = 0; i < hierarchy.length; i++) {
             System.out.println("Valor: " + hierarchy[i]);
@@ -94,7 +94,7 @@ public class frm_administrador extends javax.swing.JInternalFrame {
         // JTree arbol = new JTree(root);
 
     }
-
+    
     private DefaultMutableTreeNode processHierarchy(Object[] hierarchy) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(hierarchy[0]);
         DefaultMutableTreeNode child;
@@ -115,7 +115,7 @@ public class frm_administrador extends javax.swing.JInternalFrame {
     public void llenarCamposUsuarios(int clave) {
         ArrayList<usuarios> usuarios_ = dbusuarios.ListarUsuario(clave);
         Iterator iterator = usuarios_.iterator();
-
+        
         try {
             while (iterator.hasNext()) {
                 usuarios usuario__;
@@ -144,7 +144,7 @@ public class frm_administrador extends javax.swing.JInternalFrame {
             }
         } catch (Exception e) {
         }
-
+        
     }
 
     /**
@@ -470,6 +470,11 @@ public class frm_administrador extends javax.swing.JInternalFrame {
         );
 
         btn_nuevo.setText("Nuevo");
+        btn_nuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_nuevoActionPerformed(evt);
+            }
+        });
 
         btn_editar.setText("Editar");
         btn_editar.addActionListener(new java.awt.event.ActionListener() {
@@ -486,6 +491,7 @@ public class frm_administrador extends javax.swing.JInternalFrame {
         });
 
         btn_guardar.setText("Guardar");
+        btn_guardar.setEnabled(false);
         btn_guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_guardarActionPerformed(evt);
@@ -553,7 +559,7 @@ public class frm_administrador extends javax.swing.JInternalFrame {
         int columna_ = tablaUsuarios.getSelectedRow();
         llenarCamposUsuarios((int) tablaUsuarios.getModel().getValueAt(columna_, 0));
     }//GEN-LAST:event_llenarDatos
-
+    
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
         // TODO add your handling code here:
         usuarios_.setUsr_nombres(txt_nombres.getText());
@@ -568,16 +574,18 @@ public class frm_administrador extends javax.swing.JInternalFrame {
         usuarios_.setUsr_telefono(txt_telefono.getText());
         usuarios_.setUsr_direccion(txt_direccion.getText());
         dbusuarios.ModificarUsuario(clave_, usuarios_);
+        dbusuarios.AgregarUsuarios(usuarios_);
         this.cargarUsuarios();
-
+        
         clave_ = 0; //Reset clave.
 
         btn_nuevo.setEnabled(true);
-
+        
+        
         desactivaCamposTexto();
         refrescarCampos();
-
-
+        btn_guardar.setEnabled(false);
+        
     }//GEN-LAST:event_btn_guardarActionPerformed
 
     // Método para Activar los campos
@@ -593,7 +601,7 @@ public class frm_administrador extends javax.swing.JInternalFrame {
         txt_password.setEditable(true);
         txt_telefono.setEditable(true);
         txt_usuarioUSR.setEditable(true);
-
+        
     }
     //Método para desactivar campos texto. 
 
@@ -631,7 +639,7 @@ public class frm_administrador extends javax.swing.JInternalFrame {
         activarCamposTexto();
         btn_nuevo.setEnabled(false);
     }//GEN-LAST:event_btn_editarActionPerformed
-
+    
     private void btn_borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_borrarActionPerformed
         // TODO add your handling code here:
         dbusuarios.EliminarUsuarios(clave_);
@@ -639,6 +647,12 @@ public class frm_administrador extends javax.swing.JInternalFrame {
         cargarUsuarios();
         clave_ = 0;
     }//GEN-LAST:event_btn_borrarActionPerformed
+    
+    private void btn_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nuevoActionPerformed
+        // TODO add your handling code here:
+        activarCamposTexto();
+        btn_guardar.setEnabled(true);
+    }//GEN-LAST:event_btn_nuevoActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_borrar;
     private javax.swing.JButton btn_editar;

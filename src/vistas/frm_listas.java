@@ -5,10 +5,12 @@
 package vistas;
 
 import entidades.miembros;
+import java.awt.List;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.daomiembros;
 
@@ -25,11 +27,14 @@ public class frm_listas extends javax.swing.JDialog {
     daomiembros dmiembros = new daomiembros();
     DefaultTableModel modelo;
     JCheckBox checkBox = new javax.swing.JCheckBox();
+    public ArrayList<String> stringList = new ArrayList<String>();
+    String cadena = "";
 
     public frm_listas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.cargarListaContactos();
+
     }
 
     /**
@@ -42,7 +47,7 @@ public class frm_listas extends javax.swing.JDialog {
     private void initComponents() {
 
         txt_test = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btn_AgregaLista = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaContactos = new javax.swing.JTable();
@@ -52,10 +57,10 @@ public class frm_listas extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Contactos del Sistema");
 
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_AgregaLista.setText("Agregar");
+        btn_AgregaLista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_AgregaListaActionPerformed(evt);
             }
         });
 
@@ -76,6 +81,11 @@ public class frm_listas extends javax.swing.JDialog {
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+        });
+        tablaContactos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                agregarUsuarioCorreo(evt);
             }
         });
         jScrollPane1.setViewportView(tablaContactos);
@@ -111,7 +121,7 @@ public class frm_listas extends javax.swing.JDialog {
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(btn_AgregaLista)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -122,7 +132,7 @@ public class frm_listas extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(btn_AgregaLista)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -130,17 +140,22 @@ public class frm_listas extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_AgregaListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregaListaActionPerformed
         // TODO add your handling code here:
-        //varGlobales v= new varGlobales();
-        //v.correos = txt_test.getText();
-        //frm_correo correo = frm_correo(); 
-        //  frm_correo correo = new  frm_correo();
-        //correo.txt_contactosEnvio.setText(txt_test.getText());
-        //  correo.txt_contactosEnvio.setText(txt_test.getText());
-        //    correo.setVisible(true);
-        //this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        /*stringList.add("fjgm@aol.com.mx");
+         stringList.add("fcojavier05@gmail.com");*/
+    }//GEN-LAST:event_btn_AgregaListaActionPerformed
+
+    private void agregarUsuarioCorreo(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarUsuarioCorreo
+        // TODO add your handling code here:
+        int i = tablaContactos.getSelectedRow();
+        cadena = (String) tablaContactos.getValueAt(i, 2);
+        int val = JOptionPane.showConfirmDialog(rootPane, "Se Agregará el Correo " + cadena + " a la lista de Envío. ¿Desea continuar?", "Confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+        if (val == JOptionPane.YES_NO_OPTION) {
+            stringList.add(cadena);
+        }
+
+    }//GEN-LAST:event_agregarUsuarioCorreo
 
     //
     public void cargarListaContactos() {
@@ -217,7 +232,7 @@ public class frm_listas extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btn_AgregaLista;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;

@@ -17,17 +17,17 @@ public class Conexion {
     private java.sql.Connection connection = null;
     //Esta variable permitirá al usuario escribir el servidor al que deseea conectarse.
     //esto ayudará a no tener que recompilar el sistema cada vez que se pierda una ip.
-    public static String servidor = "localhost"; 
-    
+    public static String servidor = "";
+
     public java.sql.Connection getConnection() {
         if (connection == null) {
             try {
                 java.sql.Driver driver = new com.mysql.jdbc.Driver();
                 DriverManager.registerDriver(driver);
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/icymail", "root", "220686");
-              //  connection = DriverManager.getConnection("jdbc:mysql:///icymail","root","220686");
+                connection = DriverManager.getConnection("jdbc:mysql://" + servidor + ":3306/icymail", "root", "220686");
+                //  connection = DriverManager.getConnection("jdbc:mysql:///icymail","root","220686");
             } catch (SQLException ex) {
-               excepciones.NoBaseDatos(); // [Javier] Esto se encuentra en la clase Excepciones. 
+                excepciones.NoBaseDatos(); // [Javier] Esto se encuentra en la clase Excepciones. 
             }
 
         }
@@ -41,5 +41,4 @@ public class Conexion {
     public void setServidor(String servidor) {
         this.servidor = servidor;
     }
-    
 }

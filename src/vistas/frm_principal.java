@@ -65,6 +65,7 @@ public class frm_principal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        menu_mailnoentregado = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jfile_salir = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -152,15 +153,23 @@ public class frm_principal extends javax.swing.JFrame {
 
         jMenu1.setText("Archivo");
 
-        jMenu3.setText("Nuevo");
+        jMenu3.setText("Correos");
 
-        jMenuItem2.setText("Correo Electrónico");
+        jMenuItem2.setText("Nuevo Correo ");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
             }
         });
         jMenu3.add(jMenuItem2);
+
+        menu_mailnoentregado.setText("Correo no entregado");
+        menu_mailnoentregado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_mailnoentregadoActionPerformed(evt);
+            }
+        });
+        jMenu3.add(menu_mailnoentregado);
 
         jMenu1.add(jMenu3);
         jMenu1.add(jSeparator1);
@@ -312,6 +321,18 @@ public class frm_principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_confirmacion
 
+    private void menu_mailnoentregadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_mailnoentregadoActionPerformed
+        // TODO add your handling code here:
+        frm_correonoEntregado noentregado = null; 
+        try {
+            noentregado = new frm_correonoEntregado();
+        } catch (IOException ex) {
+            Logger.getLogger(frm_principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        escritorio.add(noentregado);
+        noentregado.show();
+    }//GEN-LAST:event_menu_mailnoentregadoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -380,6 +401,7 @@ public class frm_principal extends javax.swing.JFrame {
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenuItem jfile_salir;
     private javax.swing.JMenuItem jmenu_usuarios;
+    private javax.swing.JMenuItem menu_mailnoentregado;
     private javax.swing.JMenuItem menu_perfil;
     // End of variables declaration//GEN-END:variables
 }

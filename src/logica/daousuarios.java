@@ -19,7 +19,7 @@ public class daousuarios implements interface_usuarios {
 
     @Override
     public void AgregarUsuarios(usuarios usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        usuarios.AgregarUsuarios(usuario);
     }
 
     @Override
